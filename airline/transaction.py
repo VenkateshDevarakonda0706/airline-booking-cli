@@ -50,9 +50,9 @@ class BookingTransaction:
             self.booking_manager.bookings = self._bookings_snapshot
 
             for flight_number, available_seats in self._seat_snapshot.items():
-                self.booking_manager.flights[
-                    flight_number
-                ].available_seats = available_seats
+                self.booking_manager.flights[flight_number].available_seats = (
+                    available_seats
+                )
 
             print("[transaction] Rollback completed.")
 

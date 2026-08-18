@@ -3,7 +3,6 @@ from functools import wraps
 from time import perf_counter, sleep
 from typing import Any, TypeVar
 
-
 T = TypeVar("T")
 
 
@@ -18,10 +17,7 @@ def timed(func: Callable[..., T]) -> Callable[..., T]:
 
         elapsed_time = perf_counter() - start_time
 
-        print(
-            f"[timer] {func.__name__} "
-            f"completed in {elapsed_time:.4f}s"
-        )
+        print(f"[timer] {func.__name__} " f"completed in {elapsed_time:.4f}s")
 
         return result
 

@@ -24,11 +24,7 @@ class FlightSearch:
 
     def find_by_max_price(self, max_price: float) -> list[Flight]:
         """Returns flights within the given maximum price."""
-        return [
-            flight
-            for flight in self.flights
-            if flight.price <= max_price
-        ]
+        return [flight for flight in self.flights if flight.price <= max_price]
 
     def sort_by_price(self, descending: bool = False) -> list[Flight]:
         """Returns flights sorted by price."""

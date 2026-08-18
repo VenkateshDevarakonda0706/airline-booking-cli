@@ -6,7 +6,7 @@ class FlightNotFoundError(AirlineBookingError):
     """Raised when a requested flight cannot be found."""
 
 
-class PassengerValidationError(AirlineBookingError):
+class InvalidPassengerError(AirlineBookingError):
     """Raised when passenger information is invalid."""
 
 

@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 from datetime import datetime
+from .exceptions import InvalidPassengerError
+
 
 @dataclass(slots=True)
 class Flight:
-    '''Represents an available airline flight.'''
+    """Represents an available airline flight."""
 
     flight_number: str
     source: str
@@ -20,8 +22,8 @@ class Flight:
             f"Seats Available: {self.available_seats}/{self.total_seats}"
         )
 
-    def __lt__(self,other: "Flight") -> bool:
-        '''Compare flights by ticket price.'''
+    def __lt__(self, other: "Flight") -> bool:
+        """Compare flights by ticket price."""
         if not isinstance(other, Flight):
             return NotImplemented
         return self.price < other.price
@@ -29,31 +31,31 @@ class Flight:
 
 @dataclass(frozen=True, slots=True)
 class Passenger:
-    '''Represent a passenger.'''
+    """Represent a passenger."""
 
     name: str
     age: int
 
     def __post_init__(self) -> None:
         if not self.name.strip():
-            raise ValueError("Passenger name cannot be empty.")
+            raise InvalidPassengerError("Passenger name cannot be empty.")
 
         if self.age < 0:
-            raise ValueError("Passenger age cannot be negative.")
+            raise InvalidPassengerError("Passenger age cannot be negative.")
 
 
 @dataclass(slots=True)
 class Booking:
-    '''Represents a confirmed flight booking.'''
+    """Represents a confirmed flight booking."""
 
     booking_id: str
     passenger: Passenger
     flight: Flight
-    seat_number : str
+    seat_number: str
     cancellation_status: bool = False
     cancellation_reason: str | None = None
 
-    def cancel(self,reason: str = "Cancelled by passenger") -> None:
+    def cancel(self, reason: str = "Cancelled by passenger") -> None:
         "Cancelling the booking."
         if self.cancellation_status:
             raise ValueError("Booking is already cancelled.")

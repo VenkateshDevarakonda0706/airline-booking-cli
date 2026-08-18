@@ -14,10 +14,7 @@ class BookingManager:
     """Manage flight bookings and cancellations."""
 
     def __init__(self, flights: Iterable[Flight]) -> None:
-        self.flights = {
-            flight.flight_number: flight
-            for flight in flights
-        }
+        self.flights = {flight.flight_number: flight for flight in flights}
         self.bookings: dict[str, Booking] = {}
         self.booking_counter = 1000
 
@@ -26,9 +23,7 @@ class BookingManager:
         flight = self.flights.get(flight_number)
 
         if flight is None:
-            raise FlightNotFoundError(
-                f"Flight {flight_number} not found."
-            )
+            raise FlightNotFoundError(f"Flight {flight_number} not found.")
 
         return flight
 
@@ -50,9 +45,7 @@ class BookingManager:
             )
 
         if len(seat_number) < 2:
-            raise SeatUnavailableError(
-                f"Invalid seat number: {seat_number}."
-            )
+            raise SeatUnavailableError(f"Invalid seat number: {seat_number}.")
 
         row_part = seat_number[:-1]
         seat_letter = seat_number[-1]
@@ -63,16 +56,12 @@ class BookingManager:
             "C",
             "D",
         }:
-            raise SeatUnavailableError(
-                f"Invalid seat number: {seat_number}."
-            )
+            raise SeatUnavailableError(f"Invalid seat number: {seat_number}.")
 
         row_number = int(row_part)
 
         seats_per_row = 4
-        max_row = (
-            flight.total_seats + seats_per_row - 1
-        ) // seats_per_row
+        max_row = (flight.total_seats + seats_per_row - 1) // seats_per_row
 
         if not 1 <= row_number <= max_row:
             raise SeatUnavailableError(
@@ -84,16 +73,13 @@ class BookingManager:
             booking.seat_number
             for booking in self.bookings.values()
             if (
-                booking.flight.flight_number
-                == flight.flight_number
+                booking.flight.flight_number == flight.flight_number
                 and not booking.cancellation_status
             )
         }
 
         if seat_number in occupied_seats:
-            raise SeatUnavailableError(
-                f"Seat {seat_number} is already booked."
-            )
+            raise SeatUnavailableError(f"Seat {seat_number} is already booked.")
 
     def create_booking(
         self,
@@ -130,9 +116,7 @@ class BookingManager:
         booking = self.bookings.get(booking_id)
 
         if booking is None:
-            raise BookingNotFoundError(
-                f"Booking {booking_id} was not found."
-            )
+            raise BookingNotFoundError(f"Booking {booking_id} was not found.")
 
         return booking
 

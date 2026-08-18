@@ -3,41 +3,44 @@ from datetime import datetime
 from airline.models import Flight
 
 
-flights = [
-    Flight(
-        "AI101",
-        "HYD",
-        "DEL",
-        datetime(2026, 8, 20, 8, 30),
-        4500,
-        100,
-        10,
-    ),
-    Flight(
-        "AI102",
-        "HYD",
-        "BLR",
-        datetime(2026, 8, 20, 10, 0),
-        2800,
-        80,
-        8,
-    ),
-    Flight(
-        "AI103",
-        "HYD",
-        "DEL",
-        datetime(2026, 8, 20, 14, 0),
-        3500,
-        120,
-        0,
-    ),
-    Flight(
-        "AI104",
-        "BLR",
-        "MUM",
-        datetime(2026, 8, 20, 16, 30),
-        3200,
-        90,
-        15,
-    ),
-]
+def create_sample_flights() -> list[Flight]:
+    """Create sample flights for the application."""
+
+    return [
+        Flight(
+            flight_number="AI101",
+            source="HYD",
+            destination="DEL",
+            departure_time=datetime(2026, 8, 20, 8, 30),
+            price=4500.0,
+            total_seats=100,
+            available_seats=10,
+        ),
+        Flight(
+            flight_number="AI102",
+            source="HYD",
+            destination="BLR",
+            departure_time=datetime(2026, 8, 20, 10, 0),
+            price=2800.0,
+            total_seats=80,
+            available_seats=8,
+        ),
+        Flight(
+            flight_number="AI103",
+            source="HYD",
+            destination="DEL",
+            departure_time=datetime(2026, 8, 20, 14, 0),
+            price=3500.0,
+            total_seats=120,
+            available_seats=0,
+        ),
+        Flight(
+            flight_number="AI104",
+            source="BLR",
+            destination="MUM",
+            departure_time=datetime(2026, 8, 20, 16, 30),
+            price=3200.0,
+            total_seats=90,
+            available_seats=15,
+        ),
+    ]
